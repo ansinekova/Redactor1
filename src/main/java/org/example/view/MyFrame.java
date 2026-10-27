@@ -1,4 +1,4 @@
-package view;
+package org.example.view;
 import javax.swing.*;
 
 public class MyFrame extends JFrame {
