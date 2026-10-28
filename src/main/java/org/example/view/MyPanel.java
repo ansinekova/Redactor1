@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.Controller;
+import org.example.model.MyShape;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,32 +14,30 @@ public class MyPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-     controller.setFrame();
     Graphics2D g2 = (Graphics2D) g;
-    controller.draw(g2);
+    for (MyShape shape : controller.getShapes()) {
+        shape.draw(g2);
+    }
 
 }
 
 public MyPanel(Controller controller) {
     this.controller = controller;
-
     addMouseListener(new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
-            super.mousePressed(e);
-            controller.mousePressed(e.getPoint());
+        super.mousePressed(e);
+        controller.mousePressed(e.getPoint());
         }
     });
-    addMouseMotionListener(new MouseMotionAdapter() {
+    addMouseMotionListener(new MouseAdapter() {
         @Override
         public void mouseDragged(MouseEvent e) {
-            super.mouseDragged(e);
-            controller.mouseDragged(e.getPoint());
+        super.mouseDragged(e);
+        controller.mouseDragged(e.getPoint());
             repaint();
-        }
+            }
     });
-
-
 }
 
 }

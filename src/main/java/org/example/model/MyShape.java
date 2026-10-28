@@ -1,6 +1,7 @@
 package org.example.model;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
@@ -24,8 +25,8 @@ public class MyShape {
         g2.setPaint(paint);
     }
 
-    public void stratch(Point2D point, Point2D point1) {
-        shape.setFrameFromDiagonal(point, point1);
+    public void setFrame (Point2D[] p) {
+        shape.setFrameFromDiagonal(p[0], p[1]);
 
     }
     public MyShape clone() {
