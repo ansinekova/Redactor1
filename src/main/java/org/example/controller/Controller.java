@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import org.example.controller.action.ActionDraw;
+import org.example.controller.action.ActionInterface;
+import org.example.controller.action.ActionMove;
 import org.example.model.Model;
 import org.example.model.MyShape;
 import org.example.view.MyFrame;
@@ -21,6 +23,8 @@ public class Controller {
     MyShape currentShape;
     Point2D[]points;
     ActionDraw actionDraw;
+    ActionInterface currentAction;
+    ActionMove actionMove;
 
     public Controller() {
         points = new Point2D[2];
@@ -29,7 +33,8 @@ public class Controller {
         frame = new MyFrame(myPanel);
         actionDraw = new ActionDraw(model);
         actionDraw.setSampleShape(new MyShape(new Ellipse2D.Double()));
-        //currentShape = new MyShape(new Ellipse2D.Double());
+        actionMove = new ActionMove(model);
+        currentAction = actionDraw;
     }
 
 //    public String speak() {

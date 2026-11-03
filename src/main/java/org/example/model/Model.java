@@ -13,17 +13,11 @@ public class Model {
         this.list = new ArrayList<>();
     }
 
-//    public void add(MyShape currentShape) {
-//        list.add(currentShape.clone());
-//    }
-//
     public void createCurrentShape(MyShape shape) {
         this.currentShape = shape;
         this.list.add(currentShape);
     }
-//    public ArrayList<MyShape> getList() {
-//        return list;
-//    }
+
     public MyShape getCurrentShape() {
         return currentShape;
     }

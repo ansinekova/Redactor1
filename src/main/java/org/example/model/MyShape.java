@@ -6,15 +6,14 @@ import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
 public class MyShape {
-
-    RectangularShape shape;
+    public RectangularShape shape;
     Color color;
     FillBihavior fillBihavior;
 
     public MyShape(RectangularShape shape) {
-        fillBihavior = FillBihavior.NOFILL;
         this.shape = shape;
-        color = Color.BLUE;
+        this.color = Color.BLUE;
+        this.fillBihavior = FillBihavior.NOFILL;
     }
 
     public void draw(Graphics2D g2) {
@@ -34,5 +33,9 @@ public class MyShape {
         help.color = color;
         help.fillBihavior = fillBihavior;
         return help;
+    }
+
+    public RectangularShape getShape() {
+        return shape;
     }
 }
