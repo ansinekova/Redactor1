@@ -4,6 +4,7 @@ import org.example.model.Model;
 import org.example.model.MyShape;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
 public class ActionDraw implements ActionInterface {
@@ -33,16 +34,18 @@ public class ActionDraw implements ActionInterface {
 
     public ActionDraw() {
         p = new Point2D[2];
+        sampleShape = new MyShape(Color.BLUE, new Ellipse2D.Double());
     }
 
     public ActionDraw(  Model model) {
-        this.p = new Point2D[2];
+        this();
         this.model = model;
     }
 
     public void setShape(MyShape shape) {
         this.shape = shape;
     }
+
     public void stretchShape(Point point){
         p[1] = point;
         shape.setFrame(p);

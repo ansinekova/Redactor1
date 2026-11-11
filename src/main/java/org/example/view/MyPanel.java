@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 
 public class MyPanel extends JPanel {
-    private Controller controller;
+    Controller controller;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -23,17 +23,18 @@ public class MyPanel extends JPanel {
 
 public MyPanel(Controller controller) {
     this.controller = controller;
+    this.setBackground(Color.WHITE);
     addMouseListener(new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
+        //super.mousePressed(e);
         controller.mousePressed(e.getPoint());
         }
     });
     addMouseMotionListener(new MouseAdapter() {
         @Override
         public void mouseDragged(MouseEvent e) {
-        super.mouseDragged(e);
+        //super.mouseDragged(e);
         controller.mouseDragged(e.getPoint());
             repaint();
             }

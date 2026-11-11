@@ -23,7 +23,7 @@ public class Controller {
     MyShape currentShape;
     Point2D[]points;
     ActionDraw actionDraw;
-    ActionInterface currentAction;
+    ActionInterface actionInterface;
     ActionMove actionMove;
 
     public Controller() {
@@ -32,9 +32,10 @@ public class Controller {
         myPanel = new MyPanel(this);
         frame = new MyFrame(myPanel);
         actionDraw = new ActionDraw(model);
-        actionDraw.setSampleShape(new MyShape(new Ellipse2D.Double()));
+        actionDraw.setSampleShape(new MyShape(Color.BLUE, new Ellipse2D.Double()));
         actionMove = new ActionMove(model);
-        currentAction = actionDraw;
+        actionInterface = new ActionDraw(model);
+        frame.setController(this);
     }
 
 //    public String speak() {
@@ -45,17 +46,20 @@ public class Controller {
 //    public void setFrame() {
 //        currentShape.stratch(points[0],points[1]);
 //    }
+    public void setActionInterface(ActionInterface actionInterface) {
+        this.actionInterface = actionInterface;
+        actionInterface.setModel(model);
+    }
 
     public void mouseDragged(Point point) {
-        //points[1] = point;
-        actionDraw.stretchShape(point);
+        actionInterface.mouseDragged(point);
     }
 
     public void mousePressed(Point point) {
 //        points[0] = point;
 //        points[1] = point;
         //model.add(currentShape);
-        actionDraw.createShape(point);
+        actionInterface.mousePressed(point);
     }
     public Collection<MyShape> getShapes() {
         return model.getList();

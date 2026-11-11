@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Model {
-    private ArrayList<MyShape> list;
-    public MyShape currentShape;
+    Collection<MyShape> list;
+    MyShape currentShape;
+
     public Model() {
         this.list = new ArrayList<>();
     }
@@ -16,10 +17,6 @@ public class Model {
     public void createCurrentShape(MyShape shape) {
         this.currentShape = shape;
         this.list.add(currentShape);
-    }
-
-    public MyShape getCurrentShape() {
-        return currentShape;
     }
 
     public Collection<MyShape> getList() {
