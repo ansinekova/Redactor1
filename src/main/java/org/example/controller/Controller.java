@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionInterface;
 import org.example.controller.action.ActionMove;
+import org.example.controller.state.State;
 import org.example.model.Model;
 import org.example.model.MyShape;
 import org.example.view.MyFrame;
@@ -17,58 +18,33 @@ import java.util.Collection;
 
 public class Controller {
 
-    MyPanel myPanel;
-    MyFrame frame;
+    //RectangularShape shape;
     Model model;
-    MyShape currentShape;
-    Point2D[]points;
-    ActionDraw actionDraw;
-    ActionInterface actionInterface;
-    ActionMove actionMove;
+    MyPanel panel;
+    MyFrame frame;
+    State state;
+
 
     public Controller() {
-        points = new Point2D[2];
         model = new Model();
-        myPanel = new MyPanel(this);
-        frame = new MyFrame(myPanel);
-        actionDraw = new ActionDraw(model);
-        actionDraw.setSampleShape(new MyShape(Color.BLUE, new Ellipse2D.Double()));
-        actionMove = new ActionMove(model);
-        actionInterface = new ActionDraw(model);
-        frame.setController(this);
+        state = new State(model);
+        panel = new MyPanel(this);
+        frame = new MyFrame(panel,state);
+
     }
 
-//    public String speak() {
-//        return currentShape.speak();
-//    }
-//
 
-//    public void setFrame() {
-//        currentShape.stratch(points[0],points[1]);
-//    }
-    public void setActionInterface(ActionInterface actionInterface) {
-        this.actionInterface = actionInterface;
-        actionInterface.setModel(model);
+
+    public void mousePressed(Point point) {
+        state.getAction().mousePressed(point);
     }
 
     public void mouseDragged(Point point) {
-        actionInterface.mouseDragged(point);
+        state.getAction().mouseDragged(point);
     }
 
-    public void mousePressed(Point point) {
-//        points[0] = point;
-//        points[1] = point;
-        //model.add(currentShape);
-        actionInterface.mousePressed(point);
-    }
-    public Collection<MyShape> getShapes() {
+    public Collection<MyShape> translate() {
         return model.getList();
     }
 
-//    public void draw(Graphics2D g2) {
-//        for (MyShape shape : model.getList()) {
-//            shape.draw(g2);
-//        }
-//
-//    }
 }

@@ -1,5 +1,6 @@
 package org.example.controller.action;
 
+import org.example.model.FillBihavior;
 import org.example.model.Model;
 import org.example.model.MyShape;
 
@@ -34,7 +35,7 @@ public class ActionDraw implements ActionInterface {
 
     public ActionDraw() {
         p = new Point2D[2];
-        sampleShape = new MyShape(Color.BLUE, new Ellipse2D.Double());
+        sampleShape = new MyShape(Color.BLUE, new Ellipse2D.Double(), FillBihavior.NOFILL);
     }
 
     public ActionDraw(  Model model) {

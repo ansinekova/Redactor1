@@ -11,10 +11,10 @@ public class MyShape {
     Color color;
     FillBihavior fillBihavior;
 
-    public MyShape(Color color, RectangularShape shape) {
+    public MyShape(Color color, RectangularShape shape, FillBihavior fillBihavior) {
         this.shape = shape;
-        this.color = Color.BLUE;
-        this.fillBihavior = FillBihavior.NOFILL;
+        this.color = color;
+        this.fillBihavior = fillBihavior;
     }
     public MyShape() {
         color = Color.BLUE;
@@ -41,6 +41,7 @@ public class MyShape {
         MyShape s = new MyShape();
         s.setColor(this.color);
         s.setShape((RectangularShape) this.shape.clone());
+        s.setFillBehavior(this.fillBihavior);
         return s;
     }
     public void setShape(RectangularShape shape){
@@ -53,5 +54,13 @@ public class MyShape {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setFillBehavior(FillBihavior fillBehavior) {
+        this.fillBihavior = fillBehavior;
+    }
+
+    public FillBihavior getFillBehavior() {
+        return fillBihavior;
     }
 }
