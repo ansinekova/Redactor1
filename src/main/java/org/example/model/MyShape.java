@@ -22,6 +22,11 @@ public class MyShape {
         this.fillBihavior = FillBihavior.NOFILL;
     }
 
+    public MyShape(Color color, Ellipse2D.Double shape) {
+        this.shape = shape;
+        this.color = color;
+    }
+
     public void draw(Graphics2D g2) {
         Paint paint = g2.getPaint();
         g2.setColor(color);

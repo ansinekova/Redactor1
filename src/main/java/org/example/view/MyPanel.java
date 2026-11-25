@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MyPanel extends JPanel {
+public class MyPanel extends JPanel implements Observer {
     Controller controller;
 
     public MyPanel(Controller controller) {
@@ -38,5 +40,9 @@ public class MyPanel extends JPanel {
             shape.draw(g2);
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        repaint();
+    }
 }
 

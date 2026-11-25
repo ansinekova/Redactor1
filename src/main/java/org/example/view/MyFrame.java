@@ -5,6 +5,7 @@ import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionMove;
 import org.example.controller.state.State;
 import org.example.model.FillBihavior;
+import org.example.model.undomachine.UndoMachine;
 import org.example.view.menu.*;
 
 import javax.swing.*;
@@ -16,9 +17,11 @@ import java.util.ArrayList;
 public class MyFrame extends JFrame {
     MyPanel panel;
     State state;
-    public MyFrame(MyPanel panel,State state) {
+    UndoMachine undoMachine;
+    public MyFrame(MyPanel panel,State state,UndoMachine undoMachine) {
         /////////////////////////////// menu /////////////////////
         this.state = state;
+        this.undoMachine = undoMachine;
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         ArrayList<Action> menuItems = new ArrayList<>();
@@ -38,17 +41,20 @@ public class MyFrame extends JFrame {
                 new SwitchAction( new ActionDraw(),state)));
         menuItems.add(new SwitchState("двигать", new ImageIcon("move.gif"),
                 new SwitchAction(new ActionMove(),state)));
-//        menuItems.add(new SwitchUndo("undo", new ImageIcon("undo.gif"), undoMachine));
-//        menuItems.add(new SwitchRedo("redo", new ImageIcon("redo.gif"), undoMachine));
+        menuItems.add(new SwitchUndo("undo", new ImageIcon("undo.gif"), undoMachine));
+        menuItems.add(new SwitchRedo("redo", new ImageIcon("redo.gif"), undoMachine));
         menuItems.add(new SwitchState("выбор цвета", new ImageIcon("colors.gif"),
                 new SwitchColor(state)));
+        undoMachine.addObserver((SwitchUndo)menuItems.get(menuItems.size()-3));
+        undoMachine.addObserver((SwitchRedo)menuItems.get(menuItems.size()-2));
+        undoMachine.notifyMenu();
 
         ArrayList<JMenu> menus = new ArrayList<>();
         // menus.add(new JMenu("Файл"));
         menus.add(new JMenu("Фигура"));
         menus.add(new JMenu("Заливка"));
         menus.add(new JMenu("Действие"));
-        // menus.add(new JMenu("Undo/redo"));
+        menus.add(new JMenu("Undo/redo"));
         menus.add(new JMenu("Цвет"));
         int i = 0;
         int k = menuItems.size()-2;

@@ -6,6 +6,7 @@ import org.example.controller.action.ActionMove;
 import org.example.controller.state.State;
 import org.example.model.Model;
 import org.example.model.MyShape;
+import org.example.model.undomachine.UndoMachine;
 import org.example.view.MyFrame;
 import org.example.view.MyPanel;
 
@@ -23,20 +24,24 @@ public class Controller {
     MyPanel panel;
     MyFrame frame;
     State state;
+    UndoMachine undoMachine;
 
 
     public Controller() {
+        undoMachine = new UndoMachine();
         model = new Model();
         state = new State(model);
         panel = new MyPanel(this);
-        frame = new MyFrame(panel,state);
+        frame = new MyFrame(panel,state,undoMachine);
 
     }
 
-
-
     public void mousePressed(Point point) {
         state.getAction().mousePressed(point);
+        ActionInterface ai = state.getAction().myclone();
+        ai.addObserver(panel);
+        undoMachine.add(ai);
+
     }
 
     public void mouseDragged(Point point) {
